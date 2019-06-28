@@ -43,10 +43,8 @@ add_action('init', function() {
     add_filter('manage_edit-pizza_columns', function($pizza_columns) {
         $pizza_columns['type_pizza'] = __('Type de Pizza');
         $pizza_columns['prices'] = __('Prix');
-
-
         $pizza_columns['promo'] = __('Pomo');
-
+        
         return $pizza_columns;
     });
     add_action('manage_pizza_posts_custom_column', 'manage_pizza_colums', 10, 2);
@@ -54,7 +52,6 @@ add_action('init', function() {
     function manage_pizza_colums($column_name, $id) {
         global $wpdb;
         switch ($column_name) {
-
             case 'type_pizza':
                 $type_pizza_sql = "SELECT t.term_id, t.name 
                     FROM $wpdb->terms t
@@ -79,7 +76,6 @@ add_action('init', function() {
                 break;
         }
     }
-
     add_action('admin_enqueue_scripts', 'dro_posttype_scripts');
 });
 
@@ -107,8 +103,6 @@ function dro_posttype_scripts($hook) {
 
     $screen = get_current_screen();
     if ($hook == 'post-new.php' || $hook == 'post.php' || $hook == 'edit.php') {
-
-
         if ($screen->post_type === 'pizza') {
             wp_enqueue_style('dro-posttype-css', plugins_url('assets/css/dro-posttype-css.css', __FILE__));
             //js 
